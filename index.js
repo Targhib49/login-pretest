@@ -23,6 +23,6 @@ app.use('/users', require('./routes/users'));
 
 if (db) {
     app.listen(process.env.PORT||5000, () => {
-        console.log("running on port 3001")
+        console.log("running on port 5000")
     })
 }

@@ -1,5 +1,8 @@
+const { SECRET_KEY, REFRESH_KEY} = require("./environment")
 const db = require("./connection");
 
 module.exports = {
-    db
+    db,
+    SECRET_KEY,
+    REFRESH_KEY
 }
