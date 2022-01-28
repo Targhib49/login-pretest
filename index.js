@@ -22,7 +22,7 @@ app.use('/users', require('./routes/users'));
 //     console.log("running on port 3001")});
 
 if (db) {
-    app.listen(3001, () => {
+    app.listen(process.env.PORT||5000, () => {
         console.log("running on port 3001")
     })
 }
