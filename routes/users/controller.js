@@ -84,10 +84,11 @@ module.exports = {
                         console.log(err);
                     }
                     if (result.length > 0) {
-                        const token = jwt.sign({_id, isLoggenIn: true}, SECRET_KEY, {
+                        const id = result.user_id;
+                        const token = jwt.sign({id, isLoggedIn: true}, SECRET_KEY, {
                             expiresIn: '20s'
                         });
-                        const refreshToken = jwt.sign({_id, isLoggenIn: true}, REFRESH_KEY, {
+                        const refreshToken = jwt.sign({id, isLoggedIn: true}, REFRESH_KEY, {
                             expiresIn: '24h'
                         });
                         res.status(200).send({ token: token, refreshToken: refreshToken});
