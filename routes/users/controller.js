@@ -106,10 +106,10 @@ module.exports = {
                     if (result.length > 0) {
                         const id = result[0].user_id;
                         const token = jwt.sign({id, isLoggedIn: true}, SECRET_KEY, {
-                            expiresIn: '20m'
+                            expiresIn: '20s'
                         });
                         const refreshToken = jwt.sign({id, isLoggedIn: true}, REFRESH_KEY, {
-                            expiresIn: '24h'
+                            expiresIn: '15m'
                         });
                         res.status(200).send({ token: token, refreshToken: refreshToken});
                     } else {
@@ -153,9 +153,10 @@ module.exports = {
         try {
             const {id} = req.params;
             const {refreshToken} = req.body;
+            console.log(id);
 
             db.query(
-                "UPDATE users SET token = ? WHERE id = ?",
+                "UPDATE users SET token = ? WHERE user_id = ?",
                 [refreshToken, id],
                 (err,result) => {
                     if (err) {
@@ -175,7 +176,7 @@ module.exports = {
             const { id } = req.params;
             const newToken = "";
             db.query(
-                "UPDATE users SET token = ? WHERE id = ?",
+                "UPDATE users SET token = ? WHERE user_id = ?",
                 [id],
                 (err, result) => {
                     if (err) {
