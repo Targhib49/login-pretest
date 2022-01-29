@@ -44,7 +44,7 @@ module.exports = {
             const id = req.user.id;
             const status = req.user.isLoggedIn;
             db.query(
-                "SELECT * from users WHERE id = ?",
+                "SELECT * from users WHERE user_id = ?",
                 [id],
                 (err,result) => {
                     if (err) {
