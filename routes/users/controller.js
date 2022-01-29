@@ -39,6 +39,27 @@ module.exports = {
         }
     },
 
+    getUserById: async (req,res) => {
+        try {
+            const id = req.user.id;
+            const status = req.user.isLoggedIn;
+            db.query(
+                "SELECT * from users WHERE id = ?",
+                [id],
+                (err,result) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        const user = result.fullname
+                        res.status(200).send({currentUser: user, isLoggedIn: status})
+                    }
+                }
+            )
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
     create: async (req,res) => {
         try {
             const { fullname, role, email, password } = req.body;
@@ -86,7 +107,7 @@ module.exports = {
                     if (result.length > 0) {
                         const id = result.user_id;
                         const token = jwt.sign({id, isLoggedIn: true}, SECRET_KEY, {
-                            expiresIn: '20s'
+                            expiresIn: '20m'
                         });
                         const refreshToken = jwt.sign({id, isLoggedIn: true}, REFRESH_KEY, {
                             expiresIn: '24h'
