@@ -50,8 +50,7 @@ module.exports = {
                     if (err) {
                         console.log(err);
                     } else {
-                        const user = result.fullname
-                        res.status(200).send({currentUser: user, isLoggedIn: status})
+                        res.status(200).send({currentUser: result, isLoggedIn: status})
                     }
                 }
             )
@@ -105,7 +104,7 @@ module.exports = {
                         console.log(err);
                     }
                     if (result.length > 0) {
-                        const id = result.user_id;
+                        const id = result[0].user_id;
                         const token = jwt.sign({id, isLoggedIn: true}, SECRET_KEY, {
                             expiresIn: '20m'
                         });
