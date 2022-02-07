@@ -1,20 +1,20 @@
 const nodemailer = require('nodemailer');
 const { db } = require('../../config');
-const { GMAIL, GMAIL_PASS } = require("../../config");
+const { EMAIL, PASSWORD } = require("../../config");
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
+    host: "smtp.mailtrap.io",
+    port: 2525,
     auth: {
-        user: GMAIL,
-        pass: GMAIL_PASS,
+        user: EMAIL,
+        pass: PASSWORD,
     }
 });
 
 module.exports = {
     sendEmail: async (req,res) => {
         try {
+            console.log(EMAIL, PASSWORD);
             var otp = Math.random();
             otp = otp * 1000000;
             otp = parseInt(otp);
@@ -37,8 +37,9 @@ module.exports = {
                                 if (newError) {
                                     console.log(newError);
                                 } else {
+                                    
                                     var mailOptions = {
-                                        from: '"Test Email" <noreply.jetgaming79@gmail.com>',
+                                        from: '"Test Email" <noreply.test@mailtrap.com>',
                                         to: result[0].email,
                                         // to: email,
                                         subject: "OTP for login",
@@ -47,9 +48,10 @@ module.exports = {
 
                                     transporter.sendMail(mailOptions, (error, info) => {
                                         if (error) {
+                                            console.log("test");
                                             return console.log(error)
                                         }
-                                        res.status(200).send({message: "Mail send", message_id: info.messageId})
+                                        res.status(200).send({message: "Mail send", message_id: info.messageId, url: nodemailer.getTestMessageUrl(info)})
                                     })
                                 }
                             }
