@@ -39,7 +39,7 @@ module.exports = {
                                     var mailOptions = {
                                         from: '"Test Email" <noreply.jetgaming79@gmail.com>',
                                         to: result[0].email,
-                                        to: email,
+                                        // to: email,
                                         subject: "OTP for login",
                                         html: "<h3>OTP for account login is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>"
                                     }
