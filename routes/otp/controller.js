@@ -3,9 +3,8 @@ const { db } = require('../../config');
 const { EMAIL, PASSWORD } = require("../../config");
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
+    host: "smtp.mailtrap.io",
+    port: 2525,
     auth: {
         user: EMAIL,
         pass: PASSWORD,
