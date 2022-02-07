@@ -19,7 +19,7 @@ module.exports = {
             otp = parseInt(otp);
 
             const {id} = req.params;
-            const {email} = req.body;
+            // const {email} = req.body;
 
             db.query(
                 "SELECT * FROM users where user_id = ?",
@@ -38,7 +38,7 @@ module.exports = {
                                 } else {
                                     var mailOptions = {
                                         from: '"Test Email" <noreply.jetgaming79@gmail.com>',
-                                        // to: result[0].email,
+                                        to: result[0].email,
                                         to: email,
                                         subject: "OTP for login",
                                         html: "<h3>OTP for account login is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>"
