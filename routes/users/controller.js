@@ -3,27 +3,6 @@ const jwt = require('jsonwebtoken');
 const { SECRET_KEY, REFRESH_KEY} = require("../../config");
 const e = require('express');
 
-const isEmailInUse = async (email) => {
-    try {
-        db.query(
-            "SELECT * FROM users WHERE email = ?",
-            [email],
-            (err, result) => {
-                if (err) {
-                    console.log(err)
-                }
-                if (result.length > 0) {
-                    return "yes"
-                } else {
-                    return "no"
-                }
-            }
-        )
-    } catch (error){
-        console.log(error);
-    }
-}
-
 module.exports = {
     getAll: async (req,res) => {
         try {

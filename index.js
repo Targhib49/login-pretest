@@ -17,6 +17,7 @@ app.get("/", (req,res) =>{
 })
 
 app.use('/users', require('./routes/users'));
+app.use('/otp', require('./routes/otp'));
 
 // app.listen(3001, () => {
 //     console.log("running on port 3001")});
