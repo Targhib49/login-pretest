@@ -1,13 +1,14 @@
 const nodemailer = require('nodemailer');
 const { db } = require('../../config');
+const { GMAIL, GMAIL_PASS } = require("../../config");
 
 let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
     secure: false,
     auth: {
-        user: 'jetgaming79@gmail.com',
-        pass: 'Kontrasolasik7',
+        user: GMAIL,
+        pass: GMAIL_PASS,
     }
 });
 
