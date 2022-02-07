@@ -3,8 +3,8 @@ const { db } = require('../../config');
 const { EMAIL, PASSWORD } = require("../../config");
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
+    host: "smtp.ethereal.email",
+    port: 587,
     auth: {
         user: EMAIL,
         pass: PASSWORD,
@@ -39,7 +39,7 @@ module.exports = {
                                 } else {
                                     
                                     var mailOptions = {
-                                        from: '"Test Email" <noreply.test@mailtrap.com>',
+                                        from: '"Test Email" <noreply.test@ethereal.com>',
                                         to: result[0].email,
                                         // to: email,
                                         subject: "OTP for login",
@@ -51,6 +51,7 @@ module.exports = {
                                             console.log("test");
                                             return console.log(error)
                                         }
+                                        console.log(nodemailer.getTestMessageUrl(info));
                                         res.status(200).send({message: "Mail send", message_id: info.messageId, url: nodemailer.getTestMessageUrl(info)})
                                     })
                                 }
